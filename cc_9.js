@@ -251,3 +251,100 @@ class Employee {
   
   // Log the total payroll of the company
   console.log(company.calculateTotalPayroll());
+
+
+// Task 5: Implementing Promotions
+
+// Define the Employee class
+class Employee {
+    // Initialize the properties of the Employee class
+    constructor(name, id, department, salary) {
+      this.name = name; // Assign the name property
+      this.id = id; // Assign the id property
+      this.department = department; // Assign the department property
+      this.salary = salary; // Assign the salary property
+    }
+  
+    // Method to return the employee's details as a formatted string
+    getDetails() {
+      return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
+    }
+  
+    // Method to calculate and return the employee's annual salary (salary * 12)
+    calculateAnnualSalary() {
+      return this.salary * 12; // Return the annual salary
+    }
+  }
+  
+  // Define the Manager class that inherits from Employee
+  class Manager extends Employee {
+    // Initialize the properties of the Manager class
+    constructor(name, id, department, salary, teamSize) {
+      super(name, id, department, salary); // Call the parent (Employee) constructor
+      this.teamSize = teamSize; // Assign the teamSize property specific to Manager
+    }
+  
+    // Override the getDetails method to include the team size in the manager's details
+    getDetails() {
+      return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
+    }
+  
+    // Override the calculateAnnualSalary method to include the bonus for managers
+    calculateAnnualSalary() {
+      const annualSalary = super.calculateAnnualSalary(); // Get the annual salary from the Employee class
+      const bonus = this.calculateBonus(annualSalary); // Pass the annual salary to calculateBonus
+      return annualSalary + bonus; // Add the bonus to the annual salary
+    }
+  
+    // Method to calculate the manager's bonus (10% of the annual salary)
+    calculateBonus(annualSalary) {
+      return annualSalary * 0.10; // Return 10% of the annual salary
+    }
+  }
+  
+  // Define the Company class
+  class Company {
+    // Initialize the properties of the Company class
+    constructor(name) {
+      this.name = name; // Assign the company name property
+      this.employees = []; // Initialize an empty array to store employee objects
+    }
+  
+    // Method to add an employee to the company
+    addEmployee(employee) {
+      this.employees.push(employee); // Add the given employee object to the employees array
+    }
+  
+    // Method to list all employees' details
+    listEmployees() {
+      this.employees.forEach(employee => {
+        console.log(employee.getDetails()); // Call the getDetails method on each employee object and log the result
+      });
+    }
+  
+    // Method to promote an employee to a manager
+    promoteToManager(employee, teamSize) {
+      // Create a new Manager object based on the Employee's details and the team size
+      const manager = new Manager(employee.name, employee.id, employee.department, employee.salary, teamSize);
+      // Remove the original employee from the employees array and add the new manager
+      const index = this.employees.indexOf(employee);
+      if (index !== -1) {
+        this.employees[index] = manager; // Replace the employee with the new manager
+      }
+    }
+  }
+  
+  // Company information
+  const company = new Company("GlobalTech");
+  
+  // Employee and Manager information
+  const employee1 = new Employee("Michael Green", 112, "Operations", 6000);
+  
+  // Add employee to the company
+  company.addEmployee(employee1);
+  
+  // Promote the employee to a manager with a team size of 3
+  company.promoteToManager(employee1, 3);
+  
+  // List all employees
+  company.listEmployees();
