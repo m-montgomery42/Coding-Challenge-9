@@ -1,350 +1,88 @@
 // Task 1: Creating an Employee Class
-// Define a class Employee
 class Employee {
-    // initialize the properties of the Employee class
-    constructor(name, id, department, salary) {
-      this.name = name; // Assign the name property
-      this.id = id; // Assign the id property
-      this.department = department; // Assign the department property
-      this.salary = salary; // Assign the salary property
-    }
-  
-    // Method to return the employee's details as a formatted string
-    getDetails() {
-      return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
-    }
-  
-    // Method to calculate and return the employee's annual salary (salary * 12)
-    calculateAnnualSalary() {
-      return this.salary * 12; // Return the annual salary
-    }
+  constructor(name, empId, department, salary) {
+      this.name = name; // Assign the name of the employee
+      this.empId = empId; // Assign the employee ID
+      this.department = department; // Assign the department
+      this.salary = salary; // Assign the salary
   }
-  
-  // Employee information
-  const emp1 = new Employee("John Doe", 102, "Marketing", 4500);
-  
-  // Log the employee's details to the console
-  console.log(emp1.getDetails()); 
-  
-  // Log the employee's annual salary to the console
-  console.log(emp1.calculateAnnualSalary()); 
 
-
-// Task 2: Creating a Manager Class
-
-// Define the Employee class
-class Employee {
-    // Initialize the properties of the Employee class
-    constructor(name, id, department, salary) {
-      this.name = name; // Assign the name property
-      this.id = id; // Assign the id property
-      this.department = department; // Assign the department property
-      this.salary = salary; // Assign the salary property
-    }
-  
-    // Method to return the employee's details as a formatted string
-    getDetails() {
-      return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
-    }
-  
-    // Method to calculate and return the employee's annual salary (salary * 12)
-    calculateAnnualSalary() {
-      return this.salary * 12; // Return the annual salary
-    }
+  getDetails() {
+      // Return a formatted string containing employee details
+      return `Employee: ${this.name}, ID: ${this.empId}, Department: ${this.department}, Salary: $${this.salary}`;
   }
-  
-  // Define the Manager class that inherits from Employee
-  class Manager extends Employee {
-    // Initialize the properties of the Manager class
-    constructor(name, id, department, salary, teamSize) {
-      super(name, id, department, salary); // Call the parent (Employee) constructor
-      this.teamSize = teamSize; // Assign the teamSize property specific to Manager
-    }
-  
-    // Override the getDetails method to include the team size in the manager's details
-    getDetails() {
-      return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
-    }
-  
-    // Method to calculate the manager's bonus (10% of the annual salary)
-    calculateBonus() {
-      return this.calculateAnnualSalary() * 0.10; // Return 10% of the annual salary
-    }
-  }
-  
-  // Manager information
-  const mgr1 = new Manager("Olivia Brown", 202, "Finance", 9000, 7);
-  
-  // Log the manager's details to the console
-  console.log(mgr1.getDetails()); 
-  
-  // Log the manager's bonus to the console
-  console.log(mgr1.calculateBonus()); 
 
+  calculateAnnualSalary() {
+      // Calculate and return the annual salary
+      return this.salary * 12;
+  }
+}
+
+// Task 2: Creating a Manager Class (Inheritance & Method Overriding)
+class Manager extends Employee {
+  constructor(name, empId, department, salary, teamSize) {
+      super(name, empId, department, salary); // Call the parent class constructor
+      this.teamSize = teamSize; // Assign the team size
+  }
+
+  getDetails() {
+      // Return a formatted string containing manager details
+      return `Manager: ${this.name}, ID: ${this.empId}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
+  }
+
+  calculateAnnualSalary() {
+      let annualSalary = super.calculateAnnualSalary(); // Get the base annual salary
+      let bonus = annualSalary * 0.10; // Calculate a 10% bonus
+      return annualSalary + bonus; // Return the total annual salary including bonus
+  }
+}
 
 // Task 3: Creating a Company Class
-// Define the Employee class
-class Employee {
-    // Initialize the properties of the Employee class
-    constructor(name, id, department, salary) {
-      this.name = name; // Assign the name property
-      this.id = id; // Assign the id property
-      this.department = department; // Assign the department property
-      this.salary = salary; // Assign the salary property
-    }
-  
-    // Method to return the employee's details as a formatted string
-    getDetails() {
-      return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
-    }
-  
-    // Method to calculate and return the employee's annual salary (salary * 12)
-    calculateAnnualSalary() {
-      return this.salary * 12; // Return the annual salary
-    }
+class Company {
+  constructor(name) {
+      this.name = name; // Assign the company name
+      this.employees = []; // Initialize an empty array to store employees
   }
-  
-  // Define the Manager class that inherits from Employee
-  class Manager extends Employee {
-    // Initialize the properties of the Manager class
-    constructor(name, id, department, salary, teamSize) {
-      super(name, id, department, salary); // Call the parent (Employee) constructor
-      this.teamSize = teamSize; // Assign the teamSize property specific to Manager
-    }
-  
-    // Override the getDetails method to include the team size in the manager's details
-    getDetails() {
-      return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
-    }
-  
-    // Method to calculate the manager's bonus (10% of the annual salary)
-    calculateBonus() {
-      return this.calculateAnnualSalary() * 0.10; // Return 10% of the annual salary
-    }
-  }
-  
-  // Define the Company class
-  class Company {
-    // Initialize the properties of the Company class
-    constructor(name) {
-      this.name = name; // Assign the company name property
-      this.employees = []; // Initialize an empty array to store employee objects
-    }
-  
-    // Method to add an employee to the company
-    addEmployee(employee) {
-      this.employees.push(employee); // Add the given employee object to the employees array
-    }
-  
-    // Method to list all employees' details
-    listEmployees() {
-      this.employees.forEach(employee => {
-        console.log(employee.getDetails()); // Call the getDetails method on each employee object and log the result
-      });
-    }
-  }
-  
-  // Company information
-  const company = new Company("TechCorp");
-  
-  // Employee and Manager information
-  const emp1 = new Employee("Alice Johnson", 101, "Sales", 5000);
-  const mgr1 = new Manager("John Smith", 201, "IT", 8000, 5);
-  
-  // Add employees to the company
-  company.addEmployee(emp1); 
-  company.addEmployee(mgr1);
-  
-  // Log the details of all employees in the company
-  company.listEmployees();
 
+  addEmployee(employee) {
+      this.employees.push(employee); // Add an employee to the company
+  }
+
+  listEmployees() {
+      // Return an array of employee details
+      return this.employees.map(emp => emp.getDetails());
+  }
+
+  promoteToManager(employee, teamSize) {
+      let index = this.employees.indexOf(employee); // Find the index of the employee in the list
+      if (index !== -1) {
+          let manager = new Manager(employee.name, employee.empId, employee.department, employee.salary, teamSize); // Create a new manager object
+          this.employees[index] = manager; // Replace the employee with the manager
+      }
+  }
+
+  calculateTotalPayroll() {
+      // Calculate the total payroll by summing up annual salaries of all employees
+      return this.employees.reduce((total, emp) => total + emp.calculateAnnualSalary(), 0);
+  }
+}
 
 // Task 4: Implementing a Payroll System
+let employee1 = new Employee("John Doe", 101, "Engineering", 5000); // Create an Employee object
+console.log(employee1.getDetails()); // Print employee details
+console.log(`Annual Salary: $${employee1.calculateAnnualSalary()}`); // Print employee annual salary
 
-// Define the Employee class
-class Employee {
-    // Initialize the properties of the Employee class
-    constructor(name, id, department, salary) {
-      this.name = name; // Assign the name property
-      this.id = id; // Assign the id property
-      this.department = department; // Assign the department property
-      this.salary = salary; // Assign the salary property
-    }
-  
-    // Method to return the employee's details as a formatted string
-    getDetails() {
-      return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
-    }
-  
-    // Method to calculate and return the employee's annual salary (salary * 12)
-    calculateAnnualSalary() {
-      return this.salary * 12; // Return the annual salary
-    }
-  }
-  
-  // Define the Manager class that inherits from Employee
-  class Manager extends Employee {
-    // Initialize the properties of the Manager class
-    constructor(name, id, department, salary, teamSize) {
-      super(name, id, department, salary); // Call the parent (Employee) constructor
-      this.teamSize = teamSize; // Assign the teamSize property specific to Manager
-    }
-  
-    // Override the getDetails method to include the team size in the manager's details
-    getDetails() {
-      return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
-    }
-  
-    // Override the calculateAnnualSalary method to include the bonus for managers
-    calculateAnnualSalary() {
-      const annualSalary = super.calculateAnnualSalary(); // Get the annual salary from the Employee class
-      const bonus = this.calculateBonus(annualSalary); // Pass the annual salary to calculateBonus
-      return annualSalary + bonus; // Add the bonus to the annual salary
-    }
-  
-    // Method to calculate the manager's bonus (10% of the annual salary)
-    calculateBonus(annualSalary) {
-      return annualSalary * 0.10; // Return 10% of the annual salary
-    }
-  }
-  
-  // Define the Company class
-  class Company {
-    // Initialize the properties of the Company class
-    constructor(name) {
-      this.name = name; // Assign the company name property
-      this.employees = []; // Initialize an empty array to store employee objects
-    }
-  
-    // Method to add an employee to the company
-    addEmployee(employee) {
-      this.employees.push(employee); // Add the given employee object to the employees array
-    }
-  
-    // Method to list all employees' details
-    listEmployees() {
-      this.employees.forEach(employee => {
-        console.log(employee.getDetails()); // Call the getDetails method on each employee object and log the result
-      });
-    }
-  
-    // Method to calculate the total payroll (sum of all employee salaries)
-    calculateTotalPayroll() {
-      let totalPayroll = 0; // Initialize total payroll to 0
-      this.employees.forEach(employee => {
-        totalPayroll += employee.calculateAnnualSalary(); // Add each employee's annual salary to totalPayroll
-      });
-      return `${totalPayroll} (assuming emp1 and mgr1 salaries)`; // Return the formatted string
-    }
-  }
-  
-  // Company information
-  const company = new Company("InnoTech");
-  
-  // Employee and Manager information
-  const employee1 = new Employee("Sarah Lee", 105, "HR", 4500);
-  const manager1 = new Manager("Tom Davis", 302, "Engineering", 9500, 7);
-  
-  // Add employees to the company
-  company.addEmployee(employee1); 
-  company.addEmployee(manager1);
-  
-  // Log the total payroll of the company
-  console.log(company.calculateTotalPayroll());
-
+let manager1 = new Manager("Alice Johnson", 102, "Marketing", 7000, 5); // Create a Manager object
+console.log(manager1.getDetails()); // Print manager details
+console.log(`Manager Annual Salary: $${manager1.calculateAnnualSalary()}`); // Print manager annual salary (including bonus)
 
 // Task 5: Implementing Promotions
+let company = new Company("TechCorp"); // Create a Company object
+company.addEmployee(employee1); // Add employee to the company
+company.addEmployee(manager1); // Add manager to the company
+console.log("Employees in company:", company.listEmployees()); // Print all employees in the company
 
-// Define the Employee class
-class Employee {
-    // Initialize the properties of the Employee class
-    constructor(name, id, department, salary) {
-      this.name = name; // Assign the name property
-      this.id = id; // Assign the id property
-      this.department = department; // Assign the department property
-      this.salary = salary; // Assign the salary property
-    }
-  
-    // Method to return the employee's details as a formatted string
-    getDetails() {
-      return `Employee: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}`;
-    }
-  
-    // Method to calculate and return the employee's annual salary (salary * 12)
-    calculateAnnualSalary() {
-      return this.salary * 12; // Return the annual salary
-    }
-  }
-  
-  // Define the Manager class that inherits from Employee
-  class Manager extends Employee {
-    // Initialize the properties of the Manager class
-    constructor(name, id, department, salary, teamSize) {
-      super(name, id, department, salary); // Call the parent (Employee) constructor
-      this.teamSize = teamSize; // Assign the teamSize property specific to Manager
-    }
-  
-    // Override the getDetails method to include the team size in the manager's details
-    getDetails() {
-      return `Manager: ${this.name}, ID: ${this.id}, Department: ${this.department}, Salary: $${this.salary}, Team Size: ${this.teamSize}`;
-    }
-  
-    // Override the calculateAnnualSalary method to include the bonus for managers
-    calculateAnnualSalary() {
-      const annualSalary = super.calculateAnnualSalary(); // Get the annual salary from the Employee class
-      const bonus = this.calculateBonus(annualSalary); // Pass the annual salary to calculateBonus
-      return annualSalary + bonus; // Add the bonus to the annual salary
-    }
-  
-    // Method to calculate the manager's bonus (10% of the annual salary)
-    calculateBonus(annualSalary) {
-      return annualSalary * 0.10; // Return 10% of the annual salary
-    }
-  }
-  
-  // Define the Company class
-  class Company {
-    // Initialize the properties of the Company class
-    constructor(name) {
-      this.name = name; // Assign the company name property
-      this.employees = []; // Initialize an empty array to store employee objects
-    }
-  
-    // Method to add an employee to the company
-    addEmployee(employee) {
-      this.employees.push(employee); // Add the given employee object to the employees array
-    }
-  
-    // Method to list all employees' details
-    listEmployees() {
-      this.employees.forEach(employee => {
-        console.log(employee.getDetails()); // Call the getDetails method on each employee object and log the result
-      });
-    }
-  
-    // Method to promote an employee to a manager
-    promoteToManager(employee, teamSize) {
-      // Create a new Manager object based on the Employee's details and the team size
-      const manager = new Manager(employee.name, employee.id, employee.department, employee.salary, teamSize);
-      // Remove the original employee from the employees array and add the new manager
-      const index = this.employees.indexOf(employee);
-      if (index !== -1) {
-        this.employees[index] = manager; // Replace the employee with the new manager
-      }
-    }
-  }
-  
-  // Company information
-  const company = new Company("GlobalTech");
-  
-  // Employee and Manager information
-  const employee1 = new Employee("Michael Green", 112, "Operations", 6000);
-  
-  // Add employee to the company
-  company.addEmployee(employee1);
-  
-  // Promote the employee to a manager with a team size of 3
-  company.promoteToManager(employee1, 3);
-  
-  // List all employees
-  company.listEmployees();
+company.promoteToManager(employee1, 3); // Promote an employee to a manager role
+console.log("Employees after promotion:", company.listEmployees()); // Print employees after promotion
+
+console.log(`Total Payroll: $${company.calculateTotalPayroll()}`); // Print total payroll of the company
